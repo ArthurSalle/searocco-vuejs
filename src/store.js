@@ -49,6 +49,12 @@ export default new Vuex.Store({
       data: null,
       error: false,
     },
+    tasks: {
+      loading: false,
+      loaded: false,
+      data: null,
+      error: false,
+    },
   },
   mutations: {
     /*
@@ -84,6 +90,23 @@ export default new Vuex.Store({
     setEmployeesError(state, value) {
       state.employees.error = value
     },
+
+    /*
+     ** Employees
+     */
+
+    setTasksLoading(state, value) {
+      state.tasks.loading = value
+    },
+    setTasksLoaded(state, value) {
+      state.tasks.loaded = value
+    },
+    setTasksData(state, value) {
+      state.tasks.data = value
+    },
+    setTasksError(state, value) {
+      state.tasks.error = value
+    },
   },
   actions: {
     loadData({ state, commit }, parameters) {
@@ -91,6 +114,9 @@ export default new Vuex.Store({
         return
       }
       if (state.employees.loaded || state.employees.loading) {
+        return
+      }
+      if (state.tasks.loaded || state.tasks.loading) {
         return
       }
 
@@ -108,25 +134,36 @@ export default new Vuex.Store({
               params: {},
             }
           ),
+          axios.get(
+            'https://my-json-server.typicode.com/P4Thi0ut/workero/tasks',
+            {
+              params: {},
+            }
+          ),
         ])
         .then(
-          axios.spread(function (response1, response2) {
+          axios.spread(function (response1, response2, response3) {
             commit('setProjectsData', response1.data)
             commit('setProjectsLoaded', true)
             console.log(response1.data)
             commit('setEmployeesData', response2.data)
             commit('setEmployeesLoaded', true)
             console.log(response2.data)
+            commit('setTasksData', response3.data)
+            commit('setTasksLoaded', true)
+            console.log(response3.data)
           })
         )
 
         .catch(() => {
           commit('setProjectsError', true)
           commit('setEmployeesError', true)
+          commit('setTasksError', true)
         })
         .finally(() => {
           commit('setProjectsLoading', false)
           commit('setEmployeesLoading', false)
+          commit('setTasksLoading', false)
         })
     },
   },

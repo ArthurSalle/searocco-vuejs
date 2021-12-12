@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: 'card-team',
+  name: 'team-list',
 
   created() {
     this.$store.dispatch('loadData')

@@ -7,13 +7,13 @@
     app
     class="my-4 mx-6 pa-0"
   >
-    <v-btn id="btn" min-width="0">
+    <v-btn class="pa-2" min-width="0">
       <v-icon color="var(--color-gray)">search</v-icon>
     </v-btn>
 
     <v-spacer></v-spacer>
 
-    <v-btn id="btn" min-width="0">
+    <v-btn class="pa-2" min-width="0">
       <v-icon color="var(--color-gray) " class="material-icons-outlined">
         settings
       </v-icon>
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss">
-#btn {
-  padding: 8px;
+#top-bar {
+  z-index: 100;
 }
 </style>

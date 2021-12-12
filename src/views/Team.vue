@@ -1,23 +1,29 @@
 <template>
   <div class="team custom-container">
-    <h1 class="team--title">L'équipe</h1>
-    <p class="team--subtitle">Vue d'ensemble des membres de l'équipe</p>
-    <div class="team--card">
-      <CardTeam />
+    <div class="team--header">
+      <h1 class="team--title">L'équipe</h1>
+      <p class="team--subtitle">Vue d'ensemble des membres de l'équipe</p>
     </div>
+    <TeamList />
   </div>
 </template>
 
 <script>
-import CardTeam from '../components/card-team.vue'
+import TeamList from '../components/team-list.vue'
 export default {
   name: 'page-team',
-  components: { CardTeam },
+  components: {
+    TeamList,
+  },
 }
 </script>
 
 <style lang="scss">
 .team {
+  &--header {
+    margin-bottom: 32px;
+  }
+
   &--title {
     font-size: 40px;
     color: var(--color-font);
@@ -28,10 +34,6 @@ export default {
     font-size: 24px;
     color: var(--color-gray);
     font-weight: 400;
-  }
-
-  &--card {
-    margin-block: 32px;
   }
 }
 </style>
