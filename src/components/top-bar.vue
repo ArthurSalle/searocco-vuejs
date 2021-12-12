@@ -5,6 +5,7 @@
     elevate-on-scroll
     fixed
     app
+    class="my-4 mx-6 pa-0"
   >
     <v-btn id="btn" min-width="0">
       <v-icon color="var(--color-gray)">search</v-icon>
@@ -13,7 +14,9 @@
     <v-spacer></v-spacer>
 
     <v-btn id="btn" min-width="0">
-      <v-icon color="var(--color-gray)">settings</v-icon>
+      <v-icon color="var(--color-gray) " class="material-icons-outlined">
+        settings
+      </v-icon>
     </v-btn>
   </v-app-bar>
 </template>

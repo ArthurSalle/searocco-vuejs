@@ -9,21 +9,31 @@ import TeamPage from '@/views/Team.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'root',
-            redirect : '/home'
-        },
-        {
-            path: '/home',
-            name: 'homePage',
-            component: HomePage
-        },
-        {
-            path: '/team',
-            name: 'teamPage',
-            component: TeamPage
-        }
-    ]
+  routes: [
+    {
+      path: '/',
+      name: 'root',
+      redirect: '/home',
+    },
+    {
+      path: '/home',
+      name: 'homePage',
+      component: HomePage,
+    },
+    {
+      path: '/team',
+      name: 'teamPage',
+      component: TeamPage,
+    },
+    {
+      path: '/activity',
+      name: 'activityPage',
+      component: ActivityPage,
+    },
+    {
+      path: '/expenses',
+      name: 'expensesPage',
+      component: ExpensesPage,
+    },
+  ],
 })

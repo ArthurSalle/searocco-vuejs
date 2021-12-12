@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "eslint": "^8.4.1",
+    "prettier": "^2.5.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuetify": "^2.4.0",
