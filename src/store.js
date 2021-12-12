@@ -29,33 +29,35 @@ export default new Vuex.Store({
       },
     ],
 
-    /*
-     ** Project models
-     ** loading : request had been sent, waiting for response
-     ** loaded : data is loaded
-     ** data : actual data retrieved from API
-     ** error : last fetch resulted in an error
-     */
-
     projects: {
       loading: false,
       loaded: false,
       data: null,
       error: false,
     },
+
     employees: {
       loading: false,
       loaded: false,
       data: null,
       error: false,
     },
+
     tasks: {
       loading: false,
       loaded: false,
       data: null,
       error: false,
     },
+
+    affectations: {
+      loading: false,
+      loaded: false,
+      data: null,
+      error: false,
+    },
   },
+
   mutations: {
     /*
      ** Projects
@@ -92,7 +94,7 @@ export default new Vuex.Store({
     },
 
     /*
-     ** Employees
+     ** Tasks
      */
 
     setTasksLoading(state, value) {
@@ -107,6 +109,23 @@ export default new Vuex.Store({
     setTasksError(state, value) {
       state.tasks.error = value
     },
+
+    /*
+     ** Tasks Affectations
+     */
+
+    setAffectationsLoading(state, value) {
+      state.affectations.loading = value
+    },
+    setAffectationsLoaded(state, value) {
+      state.affectations.loaded = value
+    },
+    setAffectationsData(state, value) {
+      state.affectations.data = value
+    },
+    setAffectationsError(state, value) {
+      state.affectations.error = value
+    },
   },
   actions: {
     loadData({ state, commit }, parameters) {
@@ -117,6 +136,9 @@ export default new Vuex.Store({
         return
       }
       if (state.tasks.loaded || state.tasks.loading) {
+        return
+      }
+      if (state.affectations.loaded || state.affectations.loading) {
         return
       }
 
@@ -140,18 +162,26 @@ export default new Vuex.Store({
               params: {},
             }
           ),
+          axios.get(
+            'https://my-json-server.typicode.com/P4Thi0ut/workero/task_affectations',
+            {
+              params: {},
+            }
+          ),
         ])
         .then(
-          axios.spread(function (response1, response2, response3) {
+          axios.spread(function (response1, response2, response3, response4) {
             commit('setProjectsData', response1.data)
             commit('setProjectsLoaded', true)
-            console.log(response1.data)
+
             commit('setEmployeesData', response2.data)
             commit('setEmployeesLoaded', true)
-            console.log(response2.data)
+
             commit('setTasksData', response3.data)
             commit('setTasksLoaded', true)
-            console.log(response3.data)
+
+            commit('setAffectationsData', response4.data)
+            commit('setAffectationsLoaded', true)
           })
         )
 
@@ -159,11 +189,13 @@ export default new Vuex.Store({
           commit('setProjectsError', true)
           commit('setEmployeesError', true)
           commit('setTasksError', true)
+          commit('setAffectationsError', true)
         })
         .finally(() => {
           commit('setProjectsLoading', false)
           commit('setEmployeesLoading', false)
           commit('setTasksLoading', false)
+          commit('setAffectationsLoading', false)
         })
     },
   },

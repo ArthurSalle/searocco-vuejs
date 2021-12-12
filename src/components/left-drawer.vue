@@ -9,7 +9,7 @@
     <v-divider></v-divider>
 
     <v-list class="nav" nav dense>
-      <v-list-item-group color="primary">
+      <v-list-item-group color="primary" v-model="selectedItem">
         <v-list-item
           link
           v-for="(nav, i) in navigation"
@@ -33,12 +33,12 @@
 
 <script type="text/javascript">
 export default {
-  props: {},
   data() {
-    return {}
+    return {
+      selectedItem: 0,
+    }
   },
-  beforeCreate() {},
-  created() {},
+
   computed: {
     navigation() {
       return this.$store.state.navigation

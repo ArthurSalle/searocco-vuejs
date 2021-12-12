@@ -80,7 +80,7 @@
         <TaskList :project-id="projectId" />
       </div>
       <div v-else>
-        <v-alert dense type="info" class="">
+        <v-alert dense type="info" max-width="500px" class="mt-15 text-center">
           Ce projet ne contient pas de tâches pour le moment
         </v-alert>
       </div>

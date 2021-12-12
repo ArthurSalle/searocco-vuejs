@@ -1,12 +1,12 @@
 <template>
-  <div v-if="employeesModel.loaded" class="d-flex flex-wrap">
+  <div v-if="employeesModel.loaded" class="team d-flex flex-wrap">
     <v-card
       max-width="250"
-      class="mr-8 mb-8 rounded-lg"
+      class="team--card mr-8 mb-8 rounded-lg"
       v-for="(employee, i) in employeesModel.data"
       :key="i"
     >
-      <v-img height="100%" dark src="../assets/building.png">
+      <v-img height="100%" dark src="../assets/desk.png">
         <v-col align-self="start" class="pa-0">
           <v-avatar size="125" tile>
             <v-img
@@ -15,7 +15,7 @@
             ></v-img>
           </v-avatar>
         </v-col>
-        <v-col class="py-0">
+        <v-col class="team--content py-0">
           <v-list-item class="px-0">
             <v-list-item-content>
               <v-list-item-title class="text-h6">
@@ -44,3 +44,11 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.team {
+  &--content {
+    background-color: rgba(184, 184, 184, 0.2);
+  }
+}
+</style>

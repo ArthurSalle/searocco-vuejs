@@ -5,7 +5,7 @@
     elevate-on-scroll
     fixed
     app
-    class="my-4 mx-6 pa-0"
+    class="px-6"
   >
     <v-btn class="pa-2" min-width="0">
       <v-icon color="var(--color-gray)">search</v-icon>
