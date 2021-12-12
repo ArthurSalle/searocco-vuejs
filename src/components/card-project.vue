@@ -2,10 +2,10 @@
   <div>
     <div
       v-if="projectsModel.loaded && employeesModel.loaded"
-      class="d-flex justify-space-between"
+      class="d-flex flex-wrap"
     >
       <v-card
-        class="card rounded-lg pa-4"
+        class="card mr-8 rounded-lg pa-4"
         min-width="250"
         v-for="(project, i) in projectsModel.data"
         :key="i"
@@ -59,8 +59,7 @@
 
 <script>
 export default {
-  name: 'card',
-  components: {},
+  name: 'card-project',
 
   created() {
     this.$store.dispatch('loadData')

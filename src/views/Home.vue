@@ -1,20 +1,22 @@
 <template>
-  <div class="home container">
+  <div class="home custom-container">
     <h1 class="home--title">Liste des projets</h1>
-    <p class="home--subtitle">Vue d'ensemble de l'avancement des projets</p>
+    <p class="home--subtitle ma-0">
+      Vue d'ensemble de l'avancement des projets
+    </p>
     <div class="home--card">
-      <Card />
+      <CardProject />
     </div>
   </div>
 </template>
 
 <script>
-import Card from '../components/card.vue'
+import CardProject from '../components/card-project.vue'
 
 export default {
   name: 'page-home',
   components: {
-    Card,
+    CardProject,
   },
 }
 </script>
