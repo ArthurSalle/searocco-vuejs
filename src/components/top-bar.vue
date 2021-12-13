@@ -20,7 +20,7 @@
 
       <v-badge top color="var(--color-font)" dot overlap>
         <v-btn
-          class="pa-2 ml-4 font-weight-bold"
+          class="topbar--btn pa-2 ml-4 font-weight-bold"
           color="indigo lighten-4"
           min-width="0"
           elevation="0"
@@ -55,5 +55,9 @@ export default {
 <style lang="scss" scoped>
 .topbar {
   z-index: 100;
+
+  &--btn {
+    letter-spacing: 0;
+  }
 }
 </style>
