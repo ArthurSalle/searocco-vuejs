@@ -18,7 +18,7 @@
         </v-icon>
       </v-btn>
 
-      <v-badge top color="var(--color-font)" dot overlap>
+      <v-badge top color="var(--color-font)" dot overlap bordered>
         <v-btn
           class="topbar--btn pa-2 ml-4 font-weight-bold"
           color="indigo lighten-4"
