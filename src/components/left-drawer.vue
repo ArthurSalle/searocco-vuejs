@@ -22,7 +22,8 @@
               {{ nav.icon }}
             </v-icon>
           </v-list-item-icon>
-          <v-list-item-title class="nav--title">
+
+          <v-list-item-title class="nav--title text-body-2">
             {{ nav.label }}
           </v-list-item-title>
         </v-list-item>
@@ -44,6 +45,7 @@ export default {
       return this.$store.state.navigation
     },
   },
+
   methods: {
     gotoPage(pageCode) {
       this.$router.push({ name: `${pageCode}Page` })

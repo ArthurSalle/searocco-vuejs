@@ -1,18 +1,12 @@
 <template>
-  <div class="task">
-    <v-list
-      v-if="tasksModel.loaded && employeesModel.data"
-      class="pa-0"
-      color="transparent"
-    >
-      <v-list-item-group class="d-flex flex-column">
-        <v-list-item
-          link
-          v-for="(task, i) in tasksModel.data"
-          :key="i"
-          class="mb-4 white"
-        >
-          <v-icon color="var(--color-gray)">drag_handle</v-icon>
+  <SlickList axis="y" v-model="taskList">
+    <SlickItem v-for="(task, i) in taskList" :key="i" :index="i">
+      <v-list class="pa-0" elevation="1">
+        <v-list-item class="mb-4" style="cursor: pointer">
+          <v-list-item-icon>
+            <v-icon color="var(--color-gray)">drag_handle</v-icon>
+          </v-list-item-icon>
+
           <v-alert
             v-if="task.type === 'DEVELOPMENT'"
             text
@@ -24,38 +18,57 @@
           <v-alert v-else text color="error" class="py-1 mb-0 ml-4">
             bug
           </v-alert>
-          <v-list-item-title class="ml-4">
-            {{ task.label }}
-          </v-list-item-title>
-          <v-list class="d-flex">
-            <v-list-item-avatar
-              class="task--avatar my-0 ml-0 mr-0"
-              v-for="(employee, i) in getAffectations(task)"
-              :key="i"
-              size="35"
-            >
-              <v-img
-                :alt="employee.fistname"
-                :src="employee.profile_picture"
-                class="ma-0"
-              ></v-img>
-            </v-list-item-avatar>
-          </v-list>
+
+          <v-list-item-content class="ml-10">
+            <v-list-item-title>{{ task.label }}</v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-avatar
+            class="task--avatar my-0 ml-0 mr-0"
+            v-for="(employee, i) in getAffectations(task)"
+            :key="i"
+            size="35"
+          >
+            <v-img
+              :alt="employee.fistname"
+              :src="employee.profile_picture"
+              class="ma-0"
+            ></v-img>
+          </v-list-item-avatar>
         </v-list-item>
-      </v-list-item-group>
-    </v-list>
-  </div>
+      </v-list>
+    </SlickItem>
+  </SlickList>
 </template>
 
 <script>
+import { SlickList, SlickItem } from 'vue-slicksort'
+
 export default {
   name: 'task-list',
+
   props: {
     projectId: Number,
+    codeName: String,
+  },
+
+  components: {
+    SlickList,
+    SlickItem,
+  },
+
+  data() {
+    return {
+      taskList: [],
+    }
   },
 
   created() {
     this.$store.dispatch('loadData')
+  },
+
+  mounted() {
+    this.taskList = this.$store.state.tasks.data
   },
 
   computed: {

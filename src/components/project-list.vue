@@ -1,12 +1,7 @@
 <template>
   <div class="project">
     <div v-if="projectsModel.loaded && employeesModel.loaded">
-      <div class="project--header">
-        <h1 class="project--title">Liste des projets</h1>
-        <p class="project--subtitle ma-0">
-          Vue d'ensemble de l'avancement des projets
-        </p>
-      </div>
+      <Header :title="title" :subtitle="subtitle" />
 
       <div class="d-flex flex-wrap mb-8">
         <v-card
@@ -17,11 +12,13 @@
           @click="onClick(i, project.id, project.code)"
           :class="{ active: isActiveEl == i }"
           :ripple="false"
+          style="cursor: pointer"
         >
           <v-card-text class="py-0">
             <h5 class="card--title text-h5 font-weight-bold">
               {{ project.code }}
             </h5>
+
             <div class="card--details">
               <p class="card--details_content">
                 Statut:
@@ -44,6 +41,7 @@
               </p>
             </div>
           </v-card-text>
+
           <div class="d-flex align-center px-4">
             <v-list
               v-for="(employee, i) in employeesModel.data.slice(0, 3)"
@@ -65,21 +63,15 @@
         </v-card>
       </div>
     </div>
+
     <div v-if="projectsModel.loaded && employeesModel.loaded">
-      <div class="project--header">
-        <h2 class="project--title">
-          {{ codeName }} |
-          <span class="project--title_thin">Priorisation des tâches</span>
-        </h2>
-        <p class="project--subtitle ma-0">
-          Quel est le planning pour aujourd'hui ?
-        </p>
+      <div v-if="tasksModel.data[isActiveEl].project_id === projectId">
+        <Header :title="codeName" :span="span" :subtitle="subtitleTask" />
+        <TaskList :project-id="projectId" :code-name="codeName" />
       </div>
 
-      <div v-if="tasksModel.data[isActiveEl].project_id === projectId">
-        <TaskList :project-id="projectId" />
-      </div>
       <div v-else>
+        <Header :title="codeName" :span="span" :subtitle="subtitleTask" />
         <v-alert dense type="info" max-width="500px" class="mt-15 text-center">
           Ce projet ne contient pas de tâches pour le moment
         </v-alert>
@@ -90,11 +82,14 @@
 
 <script>
 import TaskList from '../components/task-list.vue'
+import Header from './header.vue'
 
 export default {
   name: 'project-list',
+
   components: {
     TaskList,
+    Header,
   },
 
   data() {
@@ -102,6 +97,10 @@ export default {
       isActiveEl: 0,
       codeName: '#BLE627',
       projectId: 1,
+      title: 'Liste des projets',
+      span: ' | Priorisation des tâches',
+      subtitle: "Vue d'ensemble de l'avancement des projets",
+      subtitleTask: "Quel est le planning pour aujourd'hui ?",
     }
   },
 
@@ -132,29 +131,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.project {
-  &--header {
-    margin-bottom: 32px;
-  }
-
-  &--title {
-    font-size: 40px;
-    color: var(--color-font);
-    font-weight: 600;
-
-    &_thin {
-      font-weight: 400;
-    }
-  }
-
-  &--subtitle {
-    font-size: 24px;
-    color: var(--color-gray);
-    font-weight: 400;
-  }
-}
 .card {
-  cursor: pointer;
   transition: all 0.2s ease-in-out;
   border: solid transparent 4px;
 

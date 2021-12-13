@@ -12,6 +12,7 @@
     "prettier": "^2.5.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
+    "vue-slicksort": "^1.2.0",
     "vuetify": "^2.4.0",
     "vuex": "^3.0.1"
   },
